@@ -31,3 +31,24 @@ console.log(getComputerChoice());
 console.log(getComputerChoice());
 console.log(getComputerChoice());
 
+/*------------
+undrestand:
+a funtion that get the choice of the user and return it
+input : "rock" , "paper" , "scissors"
+output : "rock" , "paper" , "scissors"
+
+------------
+plan && pseudocode :
+create a function
+prompt the user choice
+assign the prompt to a varrible
+return the varible
+
+------------
+*/
+//human choice  step two
+function getHumanChoice(){
+    let userInput = prompt("choose rock, paper, or scissors:");
+    return userInput;
+}
+console.log(getHumanChoice());
