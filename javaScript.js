@@ -26,7 +26,7 @@ function getComputerChoice(){
     return "scissors"
   }
 };
-console.log(getComputerChoice());
+//console.log(getComputerChoice());
 
 
 ////////////////////////////////////////////////////
@@ -49,17 +49,16 @@ function getHumanChoice(){
     let userInput = prompt("choose rock, paper, or scissors:");
     return userInput;
 }
-console.log(getHumanChoice());
+//console.log(getHumanChoice());
 
 
 ////////////////////////////////////////////////////
 //  step 3
-let humanScore = 0;
-let computerScore = 0;
+//let humanScore = 0;
+//let computerScore = 0;
 
 ////////////////////////////////////////////////////
 //  Step 4: playRound Function
-
 /* 
 UNDERSTAND:
 - The function takes two choices: human and computer.
@@ -83,19 +82,61 @@ function playRound (humanChoice, computerChoice){
   computerChoice = computerChoice.toLowerCase();
   if (humanChoice === computerChoice){
     console.log("It's a tie!");
+    return "tie";
   }else if (
-    humanChoice === "rock" && computerChoice === "scissors" ||
-    humanChoice === "paper" && computerChoice === "rock" ||
-    humanChoice === "scissors" && computerChoice === "paper"){
+    (humanChoice === "rock" && computerChoice === "scissors") ||
+    (humanChoice === "paper" && computerChoice === "rock") ||
+    (humanChoice === "scissors" && computerChoice === "paper")){
       console.log(`you win! ${humanChoice} beats ${computerChoice}`);
-      humanScore++;
+      return "human";
     }else{
       console.log(`you loose! ${computerChoice} beats ${humanChoice}`);
-      computerScore++;
+      return "computer"
     }
-    console.log(`Score => Human: ${humanScore}, Computer: ${computerScore}`);
+    //console.log(`Score => Human: ${humanScore}, Computer: ${computerScore}`);
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-playRound(humanSelection, computerSelection);
+
+//////////////////////////////////////////////////////
+/* 
+Step 6: playGame Function
+--------------------------
+UNDERSTAND:
+- Play 5 rounds of Rock Paper Scissors between human and computer.
+- Keep track of the score after each round.
+- Announce the final winner at the end.
+
+PLAN (Pseudocode):
+1. Initialize humanScore and computerScore to 0.
+2. Loop 5 times:
+   - Get human and computer choices.
+   - Play a round using playRound().
+   - Update the score based on the result.
+3. After the loop, compare scores and log the final winner.
+*/
+
+function playGame(){
+  let humanScore = 0;
+  let computerScore = 0;
+  for (let round = 1; round <= 5; round++){
+    console.log(`--- Round ${round} ---`);
+    const humanSelection = getHumanChoice();
+    const computerSelection = getComputerChoice();
+    const result = playRound(humanSelection, computerSelection);
+    if (result === "human"){
+      humanScore++;
+    }else if (result === "computer"){
+      computerScore++;
+    }
+  }
+  console.log(`Final Score:`);
+  console.log(`Human: ${humanScore} | Computer: ${computerScore}`);
+  if (humanScore > computerScore){
+    console.log("You win the game!");
+  }else if(computerScore > humanScore){
+    console.log("Computer wins the game!");
+  }else{
+    console.log("It's a tie!");
+  }
+}
+playGame();
